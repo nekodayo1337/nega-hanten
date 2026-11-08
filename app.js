@@ -164,13 +164,14 @@
     if (testUrl) upload(blob, name);
   }
 
-  /* ---- 試験用（?test=動画のURL）：自動で通しで動かし、結果を試験用サーバーへ送る ---- */
+  /* ---- 試験用（?test=動画のURL）：自動で通しで動かし、結果を試験用サーバー（動画と同じところ）へ送る ---- */
+  const devBase = testUrl ? new URL('/', new URL(testUrl, location.href)).href : '';
   function report(obj) {
-    fetch('/dev/report', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(Object.assign({ ua: navigator.userAgent }, obj)) }).catch(() => {});
+    fetch(devBase + 'dev/report', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(Object.assign({ ua: navigator.userAgent }, obj)) }).catch(() => {});
   }
   async function upload(blob, name) {
     const t = params.get('tag') || 'out';
-    await fetch('/dev/upload?name=' + encodeURIComponent(t + '.mp4'), { method: 'PUT', body: blob });
+    await fetch(devBase + 'dev/upload?name=' + encodeURIComponent(t + '.mp4'), { method: 'PUT', body: blob });
     report({ ok: true, stage: 'uploaded', name, size: blob.size });
   }
   if (testUrl) {
