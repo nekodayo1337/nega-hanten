@@ -1,0 +1,121 @@
+:root {
+  --bg: #f4f2ee;
+  --card: #ffffff;
+  --text: #1d1b18;
+  --muted: #6d6860;
+  --line: #ddd8cf;
+  --accent: #c2410c;
+  --accent-text: #ffffff;
+  --drop: #faf8f4;
+  --warn-bg: #fdecea;
+  --warn-text: #8a1c12;
+  --bar: #ece8e1;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161513;
+    --card: #211f1c;
+    --text: #f1eee8;
+    --muted: #a39d93;
+    --line: #3a3631;
+    --accent: #f97316;
+    --accent-text: #1a0d03;
+    --drop: #1b1a17;
+    --warn-bg: #3b1814;
+    --warn-text: #ffb4a8;
+    --bar: #34302b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161513;
+  --card: #211f1c;
+  --text: #f1eee8;
+  --muted: #a39d93;
+  --line: #3a3631;
+  --accent: #f97316;
+  --accent-text: #1a0d03;
+  --drop: #1b1a17;
+  --warn-bg: #3b1814;
+  --warn-text: #ffb4a8;
+  --bar: #34302b;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 40px 16px 56px; }
+.head h1 { font-size: 32px; letter-spacing: 0.04em; margin: 0 0 4px; }
+.lead { margin: 0 0 24px; color: var(--muted); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 220px;
+  border: 2px dashed var(--line);
+  border-radius: 12px;
+  background: var(--drop);
+  cursor: pointer;
+  text-align: center;
+  padding: 24px 16px;
+  transition: border-color .15s, background .15s;
+}
+.drop:hover, .drop.over { border-color: var(--accent); }
+.drop input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.drop-main { font-size: 20px; font-weight: 700; }
+.drop-sub { color: var(--muted); font-size: 14px; }
+.note { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
+
+.file-name { font-weight: 700; margin: 0 0 12px; word-break: break-all; }
+.status p { margin: 0 0 8px; }
+.bar { height: 10px; background: var(--bar); border-radius: 99px; overflow: hidden; }
+.bar-fill { height: 100%; width: 0; background: var(--accent); border-radius: 99px; transition: width .2s; }
+
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.compare figure { margin: 0; }
+.compare canvas { width: 100%; height: auto; display: block; border-radius: 8px; background: #000; }
+.compare figcaption { font-size: 13px; color: var(--muted); margin-top: 4px; text-align: center; }
+@media (max-width: 560px) { .compare { grid-template-columns: 1fr; } }
+
+.hint { font-size: 13px; color: var(--muted); margin: 10px 0 0; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+.btn:hover { filter: brightness(1.05); }
+.ok { font-size: 20px; font-weight: 700; margin: 0; }
+.warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 12px; padding: 14px 16px; }
+.warn p { margin: 0 0 4px; }
+.foot { color: var(--muted); font-size: 13px; margin-top: 24px; }
+.foot p { margin: 0; }
